@@ -21,7 +21,11 @@
         "pigochu/yii2-jquery-locationpicker": ">=0.2.0",
         "2amigos/yii2-google-maps-library" : "*",
         "yii2mod/yii2-google-maps-markers": "*",
-        "2amigos/yii2-leaflet-extension": "~1.0"
+        "2amigos/yii2-leaflet-extension": "~1.0",
+        "yiisoft/yii2-mongodb": "^2.1",
+        "kartik-v/yii2-widget-fileinput": "^1.1",
+        "dektrium/yii2-user": "^0.9.14",
+        "smalot/pdfparser": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

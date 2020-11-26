@@ -38,21 +38,17 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
+            ['label' => 'Home', 'url' => ['/site/index'], 'visible' => Yii::$app->user->isGuest],
+            ['label' => 'Create New Division', 'url' => ['/division/create'], 'visible' => Yii::$app->user->isGuest],
+            ['label' => 'All Division', 'url' => ['/division/index'], 'visible' => Yii::$app->user->isGuest],
+            ['label' => 'All Division in map', 'url' => ['/division/all'], 'visible' => Yii::$app->user->isGuest],
+            Yii::$app->user->isGuest ?
+                ['label' => 'Sign in', 'url' => ['/user/security/login']] :
+                ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/user/security/logout'],
+                    'linkOptions' => ['data-method' => 'post']],
+                ['label' => 'Register', 'url' => ['/user/registration/register'], 'visible' => Yii::$app->user->isGuest],
+                 
         ],
     ]);
     NavBar::end();
@@ -68,11 +64,7 @@ AppAsset::register($this);
 </div>
 
 <footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
+   
 </footer>
 
 <?php $this->endBody() ?>

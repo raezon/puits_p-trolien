@@ -47,7 +47,7 @@ use dosamigos\google\maps\Map;
 use dosamigos\google\maps\services\DirectionsRequest;
 use dosamigos\google\maps\overlays\Polygon;
 use dosamigos\google\maps\layers\BicyclingLayer;
-
+//Try to get the coordinate and the length and think of way to fisplay them
 $coord = new LatLng(['lat' => 39.720089311812094, 'lng' => 2.91165944519042]);
 $map = new Map([
     'center' => $coord,
