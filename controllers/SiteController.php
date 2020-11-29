@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Search;
+use app\models\Divisionexploration;
 
 class SiteController extends Controller
 {
@@ -61,7 +63,22 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        //creating models
+        $model=new Search();
+        $model1=new Divisionexploration();
+        if ($model->load(Yii::$app->request->post())) {
+            //we do our request
+            $model1 =Divisionexploration::find()->where(['id_puits'=>$model->id])->one();
+
+            return $this->render('index', [
+                'model' => $model,
+                'model1' => $model1,
+            ]);
+        }
+        return $this->render('index', [
+            'model' => $model,
+            'model1' => $model1,
+        ]);
     }
 
     /**
