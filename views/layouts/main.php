@@ -15,6 +15,7 @@ AppAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,51 +24,55 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
+
 <body>
-<?php $this->beginBody() ?>
+    <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index'], 'visible' => Yii::$app->user->isGuest],
-            ['label' => 'Create New Division', 'url' => ['/division/create'], 'visible' => Yii::$app->user->isGuest],
-            ['label' => 'All Division', 'url' => ['/division/index'], 'visible' => Yii::$app->user->isGuest],
-            ['label' => 'All Division in map', 'url' => ['/division/all'], 'visible' => Yii::$app->user->isGuest],
-            Yii::$app->user->isGuest ?
-                ['label' => 'Sign in', 'url' => ['/user/security/login']] :
-                ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
-                    'url' => ['/user/security/logout'],
-                    'linkOptions' => ['data-method' => 'post']],
+    <div class="wrap">
+        <?php
+        NavBar::begin([
+            'brandLabel' => Yii::$app->name,
+            'brandUrl' => Yii::$app->homeUrl,
+            'options' => [
+                'class' => 'navbar-inverse navbar-fixed-top',
+            ],
+        ]);
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => [
+                ['label' => 'Home', 'url' => ['/site/index'], 'visible' => !Yii::$app->user->isGuest],
+                ['label' => 'Create New Division', 'url' => ['/division/create'], 'visible' => !Yii::$app->user->isGuest],
+                ['label' => 'All Division', 'url' => ['/division/index'], 'visible' => !Yii::$app->user->isGuest],
+                ['label' => 'All Division in map', 'url' => ['/division/all'], 'visible' => !Yii::$app->user->isGuest],
+                Yii::$app->user->isGuest ?
+                    ['label' => 'Sign in', 'url' => ['/user/security/login']] :
+                    [
+                        'label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
+                        'url' => ['/user/security/logout'],
+                        'linkOptions' => ['data-method' => 'post']
+                    ],
                 ['label' => 'Register', 'url' => ['/user/registration/register'], 'visible' => Yii::$app->user->isGuest],
-                 
-        ],
-    ]);
-    NavBar::end();
-    ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+            ],
+        ]);
+        NavBar::end();
+        ?>
+
+        <div class="container">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= Alert::widget() ?>
+            <?= $content ?>
+        </div>
     </div>
-</div>
 
-<footer class="footer">
-   
-</footer>
+    <footer class="footer">
 
-<?php $this->endBody() ?>
+    </footer>
+
+    <?php $this->endBody() ?>
 </body>
+
 </html>
 <?php $this->endPage() ?>
