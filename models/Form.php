@@ -27,7 +27,7 @@ class Form extends \yii\db\ActiveRecord
     {
         return [
             [['pdf'], 'required'],
-            [['pdf'], 'file', 'extensions' => 'svg, png,jpg', 'when' => function ($model) {
+            [['pdf'], 'file', 'extensions' => 'svg, png,jpg,pdf', 'when' => function ($model) {
                 //return true to apply the rule
                 return $model->isImageUploaded();
             }],
