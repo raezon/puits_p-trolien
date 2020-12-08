@@ -10,33 +10,18 @@ use kartik\file\FileInput;
 
 <div class="divisionexploration-form">
 
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ; ?>
+	<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= FileInput::widget([
-	'model' => $model,
-	'attribute' => 'pdf',
-	'name' => 'pdf',
-	'options' => [
-		'multiple' => true,
-		'accept' => '/*'
-	],
-	'pluginOptions' => [
-		'showCaption' => false,
-		'showRemove' => false,
-		'showUpload' => false,
-		'browseClass' => 'btn btn-primary btn-block',
-		'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
-		'browseLabel' =>  'Attach Business Card',
-		'allowedFileExtensions' => ['jpg','gif','pdf'],
-		'overwriteInitial' => false
-	],
-]);?>
-    
+	<?= $form->field($model, 'pdf[]')->widget(FileInput::class, [
+		'options' => ['multiple' => true, 'accept' => 'image/*'],
+		'pluginOptions' => ['previewFileType' => 'any']
+	]); ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
 
-    <?php ActiveForm::end(); ?>
+	<div class="form-group">
+		<?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+	</div>
+
+	<?php ActiveForm::end(); ?>
 
 </div>

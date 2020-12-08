@@ -27,7 +27,20 @@ class Form extends \yii\db\ActiveRecord
     {
         return [
             [['pdf'], 'required'],
+            [['pdf'], 'file', 'extensions' => 'svg, png,jpg', 'when' => function ($model) {
+                //return true to apply the rule
+                return $model->isImageUploaded();
+            }],
         ];
+    }
+    public function upload()
+    {
+        if ($this->validate()) {
+            //$this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -35,8 +48,6 @@ class Form extends \yii\db\ActiveRecord
      */
     public function attributeLabels()
     {
-        return [
-            'pdf' => 'attacher un pdf',
-        ];
+        return [];
     }
 }
